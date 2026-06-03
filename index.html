@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Estilo Livre Barbearia</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --preto:         #0a0a0a;
+      --carvao:        #111111;
+      --grafite:       #1c1c1c;
+      --dourado:       #c8a84b;
+      --dourado-claro: #e2c97e;
+      --creme:         #f5f0e8;
+      --branco:        #ffffff;
+      --texto-suave:   #a89b88;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--preto);
+      color: var(--creme);
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.1rem;
+      overflow-x: hidden;
+      padding-top: 80px;
+    }
+    h1,h2,h3,h4 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.06em; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: var(--dourado); border-radius: 3px; }
+    ::selection { background: rgba(200,168,75,0.3); color: #fff; }
+
+    /* NAVBAR */
+    .navbar {
+      background-color: rgba(10,10,10,0.97) !important;
+      border-bottom: 1px solid rgba(200,168,75,0.2);
+      padding: 1rem 0;
+      transition: box-shadow 0.3s;
+    }
+    .navbar-brand { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:0.12em; color:var(--dourado) !important; line-height:1; }
+    .navbar-brand span { display:block; font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.35em; color:var(--creme); opacity:0.55; margin-top:-2px; }
+    .navbar-nav .nav-link { color:var(--creme) !important; font-family:'Space Mono',monospace; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.5rem 1rem !important; transition:color 0.2s; }
+    .navbar-nav .nav-link:hover,.navbar-nav .nav-link.active { color:var(--dourado) !important; }
+    .navbar-toggler { border-color:var(--dourado); }
+    .navbar-toggler-icon { background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23c8a84b' stroke-linecap='round' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+
+    /* BOTOES */
+    .btn-gold { background:var(--dourado); color:var(--preto); font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.25em; text-transform:uppercase; padding:0.9rem 2.2rem; border:none; border-radius:0; font-weight:700; transition:all 0.25s ease; }
+    .btn-gold:hover { background:var(--dourado-claro); color:var(--preto); transform:translateY(-2px); box-shadow:0 8px 30px rgba(200,168,75,0.35); }
+    .btn-outline-gold { background:transparent; color:var(--dourado); border:1px solid var(--dourado); font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.25em; text-transform:uppercase; padding:0.85rem 2rem; border-radius:0; transition:all 0.25s ease; }
+    .btn-outline-gold:hover { background:var(--dourado); color:var(--preto); }
+
+    /* SECAO BASE */
+    section { padding: 6rem 0; }
+    .section-label { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.45em; text-transform:uppercase; color:var(--dourado); margin-bottom:0.75rem; }
+    .section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,6vw,4.5rem); line-height:1; letter-spacing:0.04em; color:var(--branco); margin-bottom:1.5rem; }
+    .divider-gold { width:50px; height:2px; background:var(--dourado); margin:1.5rem 0; }
+
+    /* HERO */
+    #home { min-height:100vh; position:relative; display:flex; align-items:center; overflow:hidden; margin-top:-80px; padding-top:80px; }
+    .hero-bg { position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1600&q=80&auto=format&fit=crop'); background-size:cover; background-position:center 30%; filter:brightness(0.28) saturate(0.7); }
+    .hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(100deg,rgba(10,10,10,0.93) 35%,rgba(10,10,10,0.4) 100%); }
+    .hero-label { font-family:'Space Mono',monospace; font-size:0.65rem; letter-spacing:0.45em; text-transform:uppercase; color:var(--dourado); display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
+    .hero-label::after { content:''; display:block; width:50px; height:1px; background:var(--dourado); opacity:0.6; }
+    .hero-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(4.5rem,11vw,9.5rem); line-height:0.88; letter-spacing:0.02em; color:var(--branco); }
+    .hero-title .accent { color:var(--dourado); display:block; }
+    .hero-subtitle { font-style:italic; font-size:1.2rem; color:var(--texto-suave); max-width:420px; line-height:1.7; margin:1.75rem 0 2.5rem; }
+    .hero-stat { border-left:2px solid var(--dourado); padding-left:1.1rem; }
+    .hero-stat-num { font-family:'Bebas Neue',sans-serif; font-size:2.8rem; color:var(--dourado); line-height:1; }
+    .hero-stat-label { font-family:'Space Mono',monospace; font-size:0.58rem; letter-spacing:0.3em; color:var(--texto-suave); text-transform:uppercase; }
+
+    /* SOBRE */
+    #sobre { background-color:var(--grafite); overflow:hidden; position:relative; }
+    #sobre::before { content:'TRADIÇÃO'; position:absolute; right:-60px; bottom:-80px; font-family:'Bebas Neue',sans-serif; font-size:200px; color:rgba(255,255,255,0.018); line-height:1; user-select:none; pointer-events:none; }
+    .sobre-img { width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:2px; filter:grayscale(15%) contrast(1.05); }
+    .sobre-img-frame { position:relative; display:inline-block; width:100%; }
+    .sobre-img-frame::before { content:''; position:absolute; top:-10px; left:-10px; width:60%; height:60%; border-top:2px solid var(--dourado); border-left:2px solid var(--dourado); opacity:0.4; z-index:0; }
+    .sobre-img-frame::after { content:''; position:absolute; bottom:-10px; right:-10px; width:60%; height:60%; border-bottom:2px solid var(--dourado); border-right:2px solid var(--dourado); opacity:0.4; }
+    .sobre-img-frame img { position:relative; z-index:1; }
+    .sobre-stat { border-left:2px solid var(--dourado); padding-left:1.1rem; }
+    .sobre-stat-num { font-family:'Bebas Neue',sans-serif; font-size:2.8rem; color:var(--dourado); line-height:1; }
+    .sobre-stat-label { font-family:'Space Mono',monospace; font-size:0.58rem; letter-spacing:0.3em; color:var(--texto-suave); text-transform:uppercase; }
+
+    /* SERVICOS */
+    #servicos { background-color:var(--preto); }
+    .card-servico { background:var(--grafite); border:1px solid rgba(200,168,75,0.1); border-radius:0; overflow:hidden; height:100%; transition:all 0.3s ease; position:relative; }
+    .card-servico::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--dourado); transform:scaleX(0); transform-origin:left; transition:transform 0.35s ease; }
+    .card-servico:hover { border-color:rgba(200,168,75,0.4); transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.55); }
+    .card-servico:hover::before { transform:scaleX(1); }
+    .card-servico-img { width:100%; height:200px; object-fit:cover; filter:grayscale(30%) brightness(0.85); transition:filter 0.35s ease; }
+    .card-servico:hover .card-servico-img { filter:grayscale(0%) brightness(0.95); }
+    .card-servico-body { padding:1.75rem; }
+    .card-servico-icon { font-size:1.6rem; color:var(--dourado); margin-bottom:0.75rem; display:block; }
+    .card-servico h4 { font-family:'Bebas Neue',sans-serif; font-size:1.55rem; letter-spacing:0.06em; color:var(--branco); margin-bottom:0.6rem; }
+    .card-servico p { color:var(--texto-suave); font-size:0.92rem; line-height:1.7; margin-bottom:1.1rem; }
+    .card-servico-price { font-family:'Bebas Neue',sans-serif; font-size:2rem; color:var(--dourado); letter-spacing:0.05em; }
+    .card-servico-price small { font-family:'Space Mono',monospace; font-size:0.58rem; color:var(--texto-suave); letter-spacing:0.2em; vertical-align:middle; margin-left:4px; }
+
+    /* GALERIA */
+    #galeria { padding:0; overflow:hidden; }
+    .galeria-grid { display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:280px 280px; gap:4px; }
+    .galeria-item { overflow:hidden; position:relative; }
+    .galeria-item:first-child { grid-row:1/3; }
+    .galeria-item img { width:100%; height:100%; object-fit:cover; filter:grayscale(20%) brightness(0.8); transition:all 0.5s ease; }
+    .galeria-item:hover img { filter:grayscale(0%) brightness(1); transform:scale(1.05); }
+    .galeria-overlay { position:absolute; inset:0; background:rgba(200,168,75,0); transition:background 0.35s; }
+    .galeria-item:hover .galeria-overlay { background:rgba(200,168,75,0.07); }
+
+    /* DEPOIMENTOS */
+    #depoimentos { background:var(--carvao); }
+    .carousel-depoimentos { max-width:780px; margin:0 auto; }
+    .depo-card { padding:3rem 2.5rem; background:var(--grafite); border:1px solid rgba(200,168,75,0.12); position:relative; }
+    .depo-card::before { content:'\201C'; font-family:'Bebas Neue',sans-serif; font-size:9rem; color:var(--dourado); opacity:0.12; position:absolute; top:-15px; left:18px; line-height:1; }
+    .depo-texto { font-style:italic; font-size:1.18rem; line-height:1.8; color:var(--creme); margin-bottom:2rem; position:relative; z-index:1; }
+    .depo-autor { display:flex; align-items:center; gap:1rem; }
+    .depo-avatar { width:54px; height:54px; border-radius:50%; object-fit:cover; border:2px solid rgba(200,168,75,0.4); flex-shrink:0; }
+    .depo-nome { font-family:'Space Mono',monospace; font-size:0.7rem; letter-spacing:0.2em; color:var(--branco); text-transform:uppercase; }
+    .depo-cargo { font-size:0.85rem; color:var(--texto-suave); }
+    .stars { color:var(--dourado); font-size:0.8rem; }
+    .carousel-control-prev,.carousel-control-next { width:44px; height:44px; background:rgba(200,168,75,0.12); border:1px solid rgba(200,168,75,0.3); border-radius:0; top:50%; transform:translateY(-50%); opacity:1; transition:background 0.2s; }
+    .carousel-control-prev { left:-60px; }
+    .carousel-control-next { right:-60px; }
+    .carousel-control-prev:hover,.carousel-control-next:hover { background:rgba(200,168,75,0.3); }
+    .carousel-indicators { bottom:-45px; }
+    .carousel-indicators [data-bs-target] { width:24px; height:2px; background-color:var(--dourado); opacity:0.3; border:none; }
+    .carousel-indicators .active { opacity:1; }
+
+    /* CONTATO */
+    #contato { background:var(--grafite); }
+    .contato-info-item { display:flex; align-items:flex-start; gap:1rem; margin-bottom:2rem; }
+    .contato-info-icon { width:42px; height:42px; background:rgba(200,168,75,0.08); border:1px solid rgba(200,168,75,0.22); display:flex; align-items:center; justify-content:center; color:var(--dourado); font-size:1rem; flex-shrink:0; }
+    .contato-info-text strong { font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:0.25em; color:var(--dourado); text-transform:uppercase; display:block; margin-bottom:0.25rem; }
+    .contato-info-text span { color:var(--creme); font-size:0.98rem; }
+    .form-control,.form-select { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); color:var(--creme); border-radius:0; padding:0.85rem 1rem; font-family:'Crimson Pro',serif; font-size:1rem; transition:border-color 0.2s; }
+    .form-control:focus { background:rgba(255,255,255,0.06); border-color:var(--dourado); color:var(--creme); box-shadow:0 0 0 3px rgba(200,168,75,0.1); }
+    .form-control::placeholder { color:rgba(255,255,255,0.22); }
+    .form-label { font-family:'Space Mono',monospace; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--texto-suave); margin-bottom:0.5rem; }
+
+    /* FOOTER */
+    footer { background:#060606; border-top:1px solid rgba(200,168,75,0.12); padding:3.5rem 0 2rem; }
+    .footer-brand { font-family:'Bebas Neue',sans-serif; font-size:2.2rem; letter-spacing:0.1em; color:var(--dourado); }
+    .footer-brand span { display:block; font-family:'Space Mono',monospace; font-size:0.52rem; letter-spacing:0.4em; color:var(--texto-suave); margin-top:-4px; }
+    .footer-links a { color:var(--texto-suave); text-decoration:none; font-family:'Space Mono',monospace; font-size:0.62rem; letter-spacing:0.2em; transition:color 0.2s; }
+    .footer-links a:hover { color:var(--dourado); }
+    .social-icon { display:inline-flex; width:36px; height:36px; align-items:center; justify-content:center; border:1px solid rgba(200,168,75,0.22); color:var(--texto-suave); font-size:0.85rem; transition:all 0.2s; text-decoration:none; }
+    .social-icon:hover { border-color:var(--dourado); color:var(--dourado); background:rgba(200,168,75,0.08); }
+    .footer-copy { font-family:'Space Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:rgba(255,255,255,0.13); }
+
+    /* RESPONSIVO */
+    @media (max-width:991px) {
+      .galeria-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(3,220px); }
+      .galeria-item:first-child { grid-row:1/3; }
+      .carousel-control-prev { left:0; }
+      .carousel-control-next { right:0; }
+    }
+    @media (max-width:575px) {
+      section { padding:4rem 0; }
+      .galeria-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(3,160px); }
+    }
+
+    /* ANIMACOES */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { opacity:0; animation:fadeUp 0.85s ease forwards; }
+    .delay-1 { animation-delay:0.15s; }
+    .delay-2 { animation-delay:0.3s; }
+    .delay-3 { animation-delay:0.45s; }
+    .delay-4 { animation-delay:0.6s; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+  <div class="container">
+    <a class="navbar-brand" href="#home">
+      Estilo Livre
+      <span>Barbearia &amp; Estética</span>
+    </a>
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu"
+            aria-controls="navMenu" aria-expanded="false" aria-label="Menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="#home">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+        <li class="nav-item"><a class="nav-link" href="#servicos">Serviços</a></li>
+        <li class="nav-item"><a class="nav-link" href="#depoimentos">Depoimentos</a></li>
+        <li class="nav-item ms-lg-3">
+          <a href="#contato" class="btn btn-gold">Agendar</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="container position-relative">
+    <div class="row">
+      <div class="col-lg-8 col-xl-7">
+        <p class="hero-label fade-up">Desde 2010 · São Paulo</p>
+        <h1 class="hero-title fade-up delay-1">
+          Arte em
+          <span class="accent">Cada Corte.</span>
+        </h1>
+        <p class="hero-subtitle fade-up delay-2">
+          Na Estilo Livre, o seu visual é tratado como uma obra de arte — com precisão, respeito e identidade própria.
+        </p>
+        <div class="d-flex flex-wrap gap-3 fade-up delay-3">
+          <a href="#servicos" class="btn btn-gold">Ver Serviços</a>
+          <a href="#contato" class="btn btn-outline-gold">Agendar Horário</a>
+        </div>
+        <div class="d-flex flex-wrap gap-4 mt-5 fade-up delay-4">
+          <div class="hero-stat">
+            <div class="hero-stat-num">14+</div>
+            <div class="hero-stat-label">Anos de Experiência</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">8k+</div>
+            <div class="hero-stat-label">Clientes Satisfeitos</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">5★</div>
+            <div class="hero-stat-label">Avaliação Média</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-5">
+        <div class="sobre-img-frame">
+          <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&q=80&auto=format&fit=crop"
+               alt="Interior da Estilo Livre Barbearia" class="sobre-img"/>
+        </div>
+      </div>
+      <div class="col-lg-6 offset-lg-1">
+        <p class="section-label">Sobre Nós</p>
+        <h2 class="section-title">Uma Barbearia com<br>Alma e Tradição</h2>
+        <div class="divider-gold"></div>
+        <p class="mb-3" style="color:var(--creme);line-height:1.85;">
+          Fundada em 2010 no coração de São Paulo, a <strong>Estilo Livre</strong> nasceu da paixão de três amigos pelo ofício da barbearia clássica — com um twist contemporâneo que respeita a individualidade de cada cliente.
+        </p>
+        <p class="mb-4" style="color:var(--texto-suave);line-height:1.85;">
+          Aqui, você não é apenas mais um número na fila. Cada visita começa com uma conversa, evolui para um ritual de cuidado e termina com você saindo mais confiante do que entrou.
+        </p>
+        <div class="row g-4 mt-2">
+          <div class="col-4">
+            <div class="sobre-stat">
+              <div class="sobre-stat-num">12</div>
+              <div class="sobre-stat-label">Barbeiros<br>Profissionais</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="sobre-stat">
+              <div class="sobre-stat-num">3</div>
+              <div class="sobre-stat-label">Unidades<br>em SP</div>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="sobre-stat">
+              <div class="sobre-stat-num">100%</div>
+              <div class="sobre-stat-label">Produtos<br>Nacionais</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SERVICOS -->
+<section id="servicos">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6">
+        <p class="section-label">O Que Fazemos</p>
+        <h2 class="section-title">Nossos Serviços</h2>
+        <div class="divider-gold"></div>
+      </div>
+      <div class="col-lg-5 offset-lg-1 d-flex align-items-end">
+        <p style="color:var(--texto-suave);line-height:1.8;margin-bottom:0.5rem;">
+          Do corte clássico ao acabamento moderno — cada procedimento executado com produtos premium e técnica apurada.
+        </p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-4">
+        <div class="card-servico">
+          <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=75&auto=format&fit=crop" alt="Corte Clássico" class="card-servico-img"/>
+          <div class="card-servico-body">
+            <i class="bi bi-scissors card-servico-icon"></i>
+            <h4>Corte Clássico</h4>
+            <p>Corte com tesoura ou máquina, modelado ao estilo do cliente. Inclui lavagem e finalização profissional.</p>
+            <div class="card-servico-price">R$ 65<small>/ sessão</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card-servico">
+          <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=75&auto=format&fit=crop" alt="Barba Completa" class="card-servico-img"/>
+          <div class="card-servico-body">
+            <i class="bi bi-emoji-smile card-servico-icon"></i>
+            <h4>Barba Completa</h4>
+            <p>Modelagem com navalha quente, toalha hot towel e bálsamo hidratante. O ritual perfeito para uma barba impecável.</p>
+            <div class="card-servico-price">R$ 55<small>/ sessão</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card-servico">
+          <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=75&auto=format&fit=crop" alt="Combo" class="card-servico-img"/>
+          <div class="card-servico-body">
+            <i class="bi bi-stars card-servico-icon"></i>
+            <h4>Combo Cabelo + Barba</h4>
+            <p>A combinação perfeita: corte profissional + barba completa com todos os cuidados incluídos.</p>
+            <div class="card-servico-price">R$ 110<small>/ sessão</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card-servico">
+          <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?w=600&q=75&auto=format&fit=crop" alt="Hidratação" class="card-servico-img"/>
+          <div class="card-servico-body">
+            <i class="bi bi-droplet-half card-servico-icon"></i>
+            <h4>Hidratação Capilar</h4>
+            <p>Tratamento intensivo com máscaras de nutrição profunda. Ideal para cabelos ressecados ou com química.</p>
+            <div class="card-servico-price">R$ 80<small>/ sessão</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card-servico">
+          <img src="https://images.unsplash.com/photo-1593702295094-56b8cf565630?w=600&q=75&auto=format&fit=crop" alt="Pigmentação" class="card-servico-img"/>
+          <div class="card-servico-body">
+            <i class="bi bi-palette card-servico-icon"></i>
+            <h4>Pigmentação de Barba</h4>
+            <p>Cobertura natural de fios brancos com pigmentos específicos. Resultado discreto e duradouro.</p>
+            <div class="card-servico-price">R$ 75<small>/ sessão</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4">
+        <div class="card-servico">
+          <img src="https://images.unsplash.com/photo-1512690459411-b9245aed614b?w=600&q=75&auto=format&fit=crop" alt="Sobrancelha" class="card-servico-img"/>
+          <div class="card-servico-body">
+            <i class="bi bi-brush card-servico-icon"></i>
+            <h4>Design de Sobrancelha</h4>
+            <p>Modelagem precisa com pinça, linha ou navalha. O detalhe que faz toda a diferença no visual.</p>
+            <div class="card-servico-price">R$ 35<small>/ sessão</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="galeria-grid">
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&q=80&auto=format&fit=crop" alt="Barbearia"/>
+      <div class="galeria-overlay"></div>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&q=75&auto=format&fit=crop" alt="Corte"/>
+      <div class="galeria-overlay"></div>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&q=75&auto=format&fit=crop" alt="Barba"/>
+      <div class="galeria-overlay"></div>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=75&auto=format&fit=crop" alt="Navalha"/>
+      <div class="galeria-overlay"></div>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&q=75&auto=format&fit=crop" alt="Barbeiro"/>
+      <div class="galeria-overlay"></div>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1512690459411-b9245aed614b?w=600&q=75&auto=format&fit=crop" alt="Finalização"/>
+      <div class="galeria-overlay"></div>
+    </div>
+    <div class="galeria-item">
+      <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?w=600&q=75&auto=format&fit=crop" alt="Produto"/>
+      <div class="galeria-overlay"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div class="container">
+    <div class="text-center mb-5">
+      <p class="section-label">O Que Dizem</p>
+      <h2 class="section-title">Depoimentos de Clientes</h2>
+      <div class="divider-gold mx-auto"></div>
+    </div>
+    <div id="carouselDepoimentos" class="carousel slide carousel-depoimentos"
+         data-bs-ride="carousel" data-bs-interval="5500">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="depo-card">
+            <p class="depo-texto">"Melhor barbearia que já frequentei em São Paulo. O Rodrigo tem um talento absurdo — entende exatamente o que você quer sem precisar de muita explicação. Ambiente impecável, música boa e café quentinho esperando. Não troco por nada."</p>
+            <div class="depo-autor">
+              <img src="https://i.pravatar.cc/100?img=11" alt="Marcos Ferreira" class="depo-avatar"/>
+              <div>
+                <div class="depo-nome">Marcos Ferreira</div>
+                <div class="depo-cargo">Designer Gráfico</div>
+                <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="depo-card">
+            <p class="depo-texto">"Fui pela primeira vez levado por um amigo e virei cliente fiel. O ritual da barba com toalha quente é uma experiência à parte — saio de lá relaxado e com a autoestima nas alturas. Atendimento sempre pontual e super cordial."</p>
+            <div class="depo-autor">
+              <img src="https://i.pravatar.cc/100?img=33" alt="Lucas Carvalho" class="depo-avatar"/>
+              <div>
+                <div class="depo-nome">Lucas Carvalho</div>
+                <div class="depo-cargo">Empresário</div>
+                <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="depo-card">
+            <p class="depo-texto">"Procurava há meses uma barbearia que soubesse trabalhar cabelo cacheado masculino com respeito à textura. Na Estilo Livre encontrei isso e muito mais. O resultado foi incrível — finalmente um corte que valoriza o que eu tenho."</p>
+            <div class="depo-autor">
+              <img src="https://i.pravatar.cc/100?img=52" alt="Rafael Pinto" class="depo-avatar"/>
+              <div>
+                <div class="depo-nome">Rafael Pinto</div>
+                <div class="depo-cargo">Professor Universitário</div>
+                <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="depo-card">
+            <p class="depo-texto">"O atendimento aqui supera qualquer expectativa. Já indiquei pra todos os colegas. Além do corte perfeito, a hidratação capilar que fiz transformou completamente meu cabelo — muito mais macio e com vida."</p>
+            <div class="depo-autor">
+              <img src="https://i.pravatar.cc/100?img=61" alt="André Oliveira" class="depo-avatar"/>
+              <div>
+                <div class="depo-nome">André Oliveira</div>
+                <div class="depo-cargo">Arquiteto</div>
+                <div class="stars mt-1"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselDepoimentos" data-bs-slide="prev">
+        <i class="bi bi-chevron-left text-white"></i>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselDepoimentos" data-bs-slide="next">
+        <i class="bi bi-chevron-right text-white"></i>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+      <div class="carousel-indicators" style="bottom:-50px;">
+        <button type="button" data-bs-target="#carouselDepoimentos" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carouselDepoimentos" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselDepoimentos" data-bs-slide-to="2"></button>
+        <button type="button" data-bs-target="#carouselDepoimentos" data-bs-slide-to="3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-lg-6">
+        <p class="section-label">Fale Conosco</p>
+        <h2 class="section-title">Agende seu Horário</h2>
+        <div class="divider-gold"></div>
+      </div>
+    </div>
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="contato-info-item">
+          <div class="contato-info-icon"><i class="bi bi-geo-alt"></i></div>
+          <div class="contato-info-text">
+            <strong>Endereço</strong>
+            <span>Rua Augusta, 1420 — Consolação<br>São Paulo · SP</span>
+          </div>
+        </div>
+        <div class="contato-info-item">
+          <div class="contato-info-icon"><i class="bi bi-telephone"></i></div>
+          <div class="contato-info-text">
+            <strong>Telefone</strong>
+            <span>(11) 3456-7890<br>(11) 98765-4321</span>
+          </div>
+        </div>
+        <div class="contato-info-item">
+          <div class="contato-info-icon"><i class="bi bi-clock"></i></div>
+          <div class="contato-info-text">
+            <strong>Horário de Funcionamento</strong>
+            <span>Seg–Sex: 9h às 20h<br>Sábado: 8h às 18h</span>
+          </div>
+        </div>
+        <div class="contato-info-item">
+          <div class="contato-info-icon"><i class="bi bi-envelope"></i></div>
+          <div class="contato-info-text">
+            <strong>E-mail</strong>
+            <span>contato@estilolivre.com.br</span>
+          </div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&q=75&auto=format&fit=crop"
+             alt="Fachada da barbearia" class="img-fluid mt-2"
+             style="filter:grayscale(20%) brightness(0.8);border:1px solid rgba(200,168,75,0.15);"/>
+      </div>
+      <div class="col-lg-7 offset-lg-1">
+        <form id="formContato" novalidate>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label class="form-label" for="nome">Nome Completo</label>
+              <input type="text" class="form-control" id="nome" placeholder="Seu nome" required/>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" for="email">E-mail</label>
+              <input type="email" class="form-control" id="email" placeholder="seu@email.com" required/>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" for="telefone">Telefone</label>
+              <input type="tel" class="form-control" id="telefone" placeholder="(11) 99999-9999"/>
+            </div>
+            <div class="col-sm-6">
+              <label class="form-label" for="servico">Serviço Desejado</label>
+              <select class="form-control" id="servico">
+                <option value="" disabled selected>Selecione...</option>
+                <option>Corte Clássico</option>
+                <option>Barba Completa</option>
+                <option>Combo Cabelo + Barba</option>
+                <option>Hidratação Capilar</option>
+                <option>Pigmentação de Barba</option>
+                <option>Design de Sobrancelha</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label" for="mensagem">Mensagem</label>
+              <textarea class="form-control" id="mensagem" rows="4" placeholder="Horário de preferência ou dúvidas..."></textarea>
+            </div>
+            <div class="col-12 mt-2">
+              <button type="submit" class="btn btn-gold w-100" id="btnEnviar">Enviar Mensagem</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-3">
+        <div class="footer-brand">
+          Estilo Livre
+          <span>Barbearia &amp; Estética</span>
+        </div>
+        <p class="mt-3" style="color:var(--texto-suave);font-size:0.9rem;line-height:1.7;">
+          Tradição, estilo e cuidado em cada detalhe — desde 2010.
+        </p>
+      </div>
+      <div class="col-lg-5">
+        <div class="footer-links d-flex flex-wrap gap-4">
+          <a href="#home">Início</a>
+          <a href="#sobre">Sobre Nós</a>
+          <a href="#servicos">Serviços</a>
+          <a href="#depoimentos">Depoimentos</a>
+          <a href="#contato">Contato</a>
+        </div>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <div class="d-flex gap-2 justify-content-lg-end">
+          <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr style="border-color:rgba(200,168,75,0.1);margin:2rem 0 1.5rem;">
+    <div class="text-center">
+      <p class="footer-copy mb-0">© 2025 ESTILO LIVRE BARBEARIA &amp; ESTÉTICA · TODOS OS DIREITOS RESERVADOS</p>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.boxShadow = window.scrollY > 60 ? '0 4px 30px rgba(0,0,0,0.7)' : 'none';
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  sections.forEach(s => {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, { threshold: 0.4 }).observe(s);
+  });
+
+  document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const c = document.getElementById('navMenu');
+      bootstrap.Collapse.getInstance(c)?.hide();
+    });
+  });
+
+  document.getElementById('formContato').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btnEnviar');
+    btn.textContent = '✓ Mensagem enviada! Entraremos em contato.';
+    btn.style.cssText = 'background:#2a4a2a;color:#b8ffb8;cursor:default;';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Enviar Mensagem';
+      btn.style.cssText = '';
+      btn.disabled = false;
+      this.reset();
+    }, 4000);
+  });
+</script>
+</body>
+</html>
